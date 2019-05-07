@@ -14,3 +14,6 @@ class Test(Local):
         ),
 
     }
+    ACCESS_LOG_FILE = os.path.join(BASE_DIR, 'temp-access.log')
+    LOGGING = Local.LOGGING
+    LOGGING['handlers']['access_log']['filename'] = ACCESS_LOG_FILE

@@ -13,3 +13,4 @@ class Local(Common):
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    MIDDLEWARE = Common.MIDDLEWARE + ('totaliatarian_network.users.middleware.TrackAccessMiddleware', )

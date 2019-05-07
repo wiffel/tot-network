@@ -37,6 +37,7 @@ class Common(Configuration):
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     )
 
     ALLOWED_HOSTS = ["*"]
@@ -122,6 +123,8 @@ class Common(Configuration):
         },
     ]
 
+    # This is used by the users.middleware.TrackAccessMiddleware
+    ACCESS_LOGS_FILE = os.path.join(BASE_DIR, 'access.log')
     # Logging
     LOGGING = {
         'version': 1,
@@ -137,6 +140,9 @@ class Common(Configuration):
             'simple': {
                 'format': '%(levelname)s %(message)s'
             },
+            'semicolumn_separated': {
+                'format': '%(asctime)s;%(message)s'
+            }
         },
         'filters': {
             'require_debug_true': {
@@ -157,6 +163,11 @@ class Common(Configuration):
             'mail_admins': {
                 'level': 'ERROR',
                 'class': 'django.utils.log.AdminEmailHandler'
+            },
+            'access_log': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': ACCESS_LOGS_FILE
             }
         },
         'loggers': {
@@ -178,6 +189,11 @@ class Common(Configuration):
                 'handlers': ['console'],
                 'level': 'INFO'
             },
+            'access': {
+                'handlers': ['access_log'],
+                'level': 'DEBUG',
+                'propagate': False
+            }
         }
     }
 

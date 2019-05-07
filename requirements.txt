@@ -32,3 +32,6 @@ pylint==2.3.1
 
 # Static and Media Storage
 django-storages==1.7.1
+
+# MongoDB
+pymongo
