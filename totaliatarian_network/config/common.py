@@ -24,6 +24,7 @@ class Common(Configuration):
 
         # Your apps
         'totaliatarian_network.users',
+        'totaliatarian_network.posts'
 
     )
 
